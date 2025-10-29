@@ -1,145 +1,164 @@
-# D487 - Secure Software Design & Development
+# D487 - Secure Software Design Notes
 
-## Course Summary
+## 📋 Table of Contents
 
-This repository contains comprehensive study notes for WGU's D487 - Secure Software Design course. The course covers fundamental principles of software security, secure coding practices, threat modeling, and implementing security throughout the Software Development Life Cycle (SDLC). These notes are designed to help students understand core security concepts and prepare for the course assessment.
-
----
-
-## Table of Contents
-
-- [Chapter 1: Introduction to Software Security](#chapter-1--introduction-to-software-security)
-  - [1.1 The Importance and Relevance of Software Security](#11-the-importance-and-relevance-of-software-security)
-  - [1.2 Software Security and the SDLC](#12-software-security-and-the-sdlc)
-  - [1.3 Quality vs. Secure Code](#13-quality-vs-secure-code)
-  - [1.4 The CIA Triad](#14-the-cia-triad)
-  - [1.5 Threat Modeling and Attack Surface Validation](#15-threat-modeling-and-attack-surface-validation)
-- [Contributors](#contributors)
+1. [Overview](#overview)
+2. [SDL Maturity Models](#sdl-maturity-models)
+3. [Threat & Risk Management](#threat--risk-management)
+4. [SDL Phase Comparison](#sdl-phase-comparison)
+5. [Final SDL Formula](#final-sdl-formula)
+6. [Quick Recap Reference](#quick-recap-reference)
+7. [Closing Analogy](#closing-analogy)
+8. [Case Study: Revvin' Engines](#case-study-revvin-engines)
+9. [Answer Keys Highlights](#answer-keys-highlights)
+10. [Visual Resources](#visual-resources)
+11. [Contributors](#contributors)
 
 ---
 
-## Chapter 1 – Introduction to Software Security
+## Overview
 
-### Chapter Overview
+**Goal:** Adapt SDL to Agile, DevOps, Cloud, or Enterprise.
 
-This chapter lays the foundation for software security. It explains why security matters, what goes wrong when it's ignored, and how security fits within the Software Development Life Cycle (SDLC).
+**Maturity Models:** BSIMM (observe others), SAMM (build your roadmap).
 
-**Key Learning Objectives:**
-- Understanding what software security means and its distinction from network/IT security
-- Recognizing why fixing security bugs early saves significant resources
-- Differentiating between SDLC (software development process) and SDL (security development lifecycle)
-- Protecting data using the CIA Triad: Confidentiality, Integrity, and Availability
+**Threat Enhancements:** MITRE ATT&CK + DEFEND models.
 
-**Quick Mnemonic:**
-> **"CIA keeps software alive."**
-> - **C** – Confidentiality → keep secrets safe
-> - **I** – Integrity → keep data clean
-> - **A** – Availability → keep systems running
+**Future:** Security automation + DevSecOps.
+
+**🎯 Mnemonic:** "AIMS" → Adapt, Integrate, Measure, Strengthen.
+
+**💡 Analogy:** Like tuning one car engine for different racetracks — same core, different setups.
 
 ---
 
-### 1.1 The Importance and Relevance of Software Security
+## SDL Maturity Models
 
-#### What the Research Shows
+### Comparison Table
 
-Software is ubiquitous—from smartphones to automobiles—and attackers are well aware of this. The majority of cyberattacks exploit vulnerabilities in code rather than network infrastructure.
+| Model | Purpose | Focus Areas | Mnemonic |
+|-------|---------|-------------|----------|
+| **SAMM** | Build your roadmap | Governance, Construction, Verification, Deployment, Education | GCVDE |
+| **BSIMM** | Learn from others | Governance, Intelligence, SSDL, Deployment | GISD |
 
-#### Why It Matters
-
-Even minor bugs can result in major losses. Organizations including DHS and the IT Advisory Committee have found that **70% of security flaws originate from poor software design**, not from hardware or network vulnerabilities.
-
-**Analogy:**
-> Think of your software like a car. If the engine (code) is faulty, fixing the paint job (network security) won't prevent it from breaking down.
-
-#### Key Takeaway
-
-**Good code = fewer vulnerabilities = fewer breaches**
-
-Secure coding must begin at the design phase, not after release.
+**💡 Analogy:**
+- SAMM = GPS (guidance)
+- BSIMM = Dashboard (status)
 
 ---
 
-### 1.2 Software Security and the SDLC
+## Threat & Risk Management
 
-#### What is SDLC?
+### Core Concepts & Mnemonics
 
-The Software Development Life Cycle (SDLC) is the systematic process of building software: plan → design → code → test → deploy → maintain.
-
-#### The Problem with Late Security Integration
-
-Traditionally, developers treated security as an afterthought. However, fixing security issues late in development can cost up to **200× more** than addressing them during the design phase.
-
-| When Flaw is Fixed | Cost Multiplier | Impact |
-|-------------------|-----------------|--------|
-| During design | 1× | Cheap and easy |
-| During testing | 20× | Still manageable |
-| After release | 200× | Costly and risky |
-
-**Mnemonic:**
-> **"Catch bugs when they're small – not when they're tall."**
+| Concept | Mnemonic | Meaning |
+|---------|----------|----------|
+| **Threat Modeling Steps** | THREAT | Identify, Survey, Decompose, Threats, Vulns |
+| **Risk Rating** | DREAD | Damage, Reproducibility, Exploitability, Affected Users, Discoverability |
+| **Response Plan** | IVAPT | Identify, Verify, Assign, Patch, Track |
+| **CVSS Severity** | LMHC | Low, Medium, High, Critical |
+| **PSIRT Workflow** | RVCD | Receive, Verify, Coordinate, Document |
+| **Continuous Improvement** | RUTR | Review, Update, Train, Refine |
 
 ---
 
-### 1.3 Quality vs. Secure Code
+## SDL Phase Comparison
 
-#### Quality Code ≠ Secure Code
+### Quick Phase Reference Table
 
-Software that functions well is not necessarily safe. A program can pass quality assurance testing while still exposing sensitive data like passwords.
-
-#### Key Differences
-
-| Quality Code | Secure Code |
-|-------------|-------------|
-| Works as expected | Works safely |
-| Meets business needs | Protects users from harm |
-| Tested for functionality | Tested for attack resistance |
-| Focused on speed and UX | Focused on defense and control |
-
-**Mnemonic: FAST vs. SAFE**
-- **FAST** → Functional, Attractive, Stable, Tested
-- **SAFE** → Secure, Authenticated, Fail-proof, Encrypted
+| Phase | Focus | Mnemonic | Output |
+|-------|-------|----------|--------|
+| **A1** | Security Assessment | DPT | Risk + PIA |
+| **A2** | Architecture | THREAT+DREAD | Threat Models |
+| **A3/A4** | Design & Development | EEL / VSAFE | Secure Code |
+| **A5** | Verification | PC | Testing Reports |
+| **PRSA** | Post-Release | SUPPORT | Patches + Monitoring |
 
 ---
 
-### 1.4 The CIA Triad
+## Final SDL Formula
 
-The three most important security goals in the Security Development Lifecycle:
+### The Formula to Remember
 
-| Goal | Meaning | Example |
-|------|---------|--------|
-| **Confidentiality** | Only authorized individuals can access data | Encrypt passwords, implement access controls |
-| **Integrity** | Data cannot be altered by unauthorized users | Use checksums, cryptographic hashing |
-| **Availability** | Systems and data are accessible when needed | Implement backups, redundancy, DDoS protection |
+```
+SDL = P² + A³ + S⁵
+```
 
-**Analogy:**
-> Think of CIA like protecting a house:
-> - **C**: Lock your doors (control access)
-> - **I**: Don't let anyone change your house number (prevent tampering)
-> - **A**: Keep keys ready so family can enter anytime (ensure accessibility)
+**Where:**
+- **P²** = Plan + Protect
+- **A³** = Assess + Architect + Automate
+- **S⁵** = Secure + Scan + Share + Sustain + Strengthen
+
+**🎯 Mnemonic Summary:**
+> "Plan it, Protect it, Perfect it."
 
 ---
 
-### 1.5 Threat Modeling and Attack Surface Validation
+## Quick Recap Reference
 
-#### What is Threat Modeling?
+### Boss Quick Recap Table
 
-Threat modeling is the process of creating a "security map"—identifying what can go wrong before it actually happens.
+| Area | Mnemonic | Memory Line |
+|------|----------|-------------|
+| **SDL Essence** | SECURE | Secure Early, Continuously Update, Review Everything |
+| **Risk Mgmt** | DREAD | Standard risk scoring model |
+| **Threat Modeling** | THREAT | Identify to Vulnerability |
+| **Post-Release** | SUPPORT | Maintain after release |
+| **Adaptation** | AIMS | Adapt SDL for any environment |
+| **Culture** | TEAM | Train, Empower, Align, Measure |
+| **Future Outlook** | GOOD | Governed, Optimized, Ongoing, Detectable |
 
-**Key Components:**
-- **Assets**: What's valuable? (e.g., credit card data, user information)
-- **Threats**: Who might attack? (e.g., external hackers, malicious insiders)
-- **Vulnerabilities**: What weaknesses exist in the system?
-- **Mitigations**: How can we reduce or eliminate risks?
+---
 
-#### Attack Surface
+## Closing Analogy
 
-The attack surface represents all possible entry points where an attacker could attempt to exploit the system. Minimizing the attack surface is a fundamental security principle.
+### 🧭 SDL = The Software's Immune System
 
-**Best Practices:**
-- Reduce unnecessary features and entry points
-- Implement principle of least privilege
-- Validate all input from untrusted sources
-- Regular security assessments and penetration testing
+- **A1 (Assessment):** Diagnosis
+- **A2 (Architecture):** Treatment plan
+- **A3/A4 (Development):** Medicine applied
+- **A5 (Verification):** Health check
+- **PRSA (Post-release):** Continuous monitoring
+
+---
+
+## Case Study: Revvin' Engines
+
+### 🧩 Appendix A – Case Study Details
+
+| Event | Summary |
+|-------|----------|
+| **Who** | Revvin' Engines Auto Parts, new dev team (C#, tester, designer, lead). |
+| **Issue** | SQL Injection caused customer credit card leaks. |
+| **Action** | Forensics → Shut down → Fix DB → Implement SDL. |
+| **Lesson** | Security is not optional — build it from day one. |
+
+**🎯 Mnemonic:** "R-E-V-V-I-N" → Root cause, Enforce SDL, Validate, Verify, Involve, Never ignore.
+
+**💡 Analogy:** Like forgetting to lock your door — by the time thieves come, it's too late.
+
+---
+
+## Answer Keys Highlights
+
+### 🧾 Appendix B – Chapter Answer Keys
+
+| Chapter | Mnemonic | Core Answer Summary |
+|---------|----------|---------------------|
+| **1** | RCIA | Security costs 200× more post-release; focus on CIA. |
+| **2** | DPLB | Start at design, least privilege, BSIMM. |
+| **3** | DPT | Discovery → PIA → Threat. |
+| **4** | THREAT+DREAD | Identify & score threats. |
+| **5** | EEL | Simplicity in design. |
+| **6** | VSAFE | Validate, Secure, Avoid leaks. |
+| **7** | PC | Define procedures & corrections. |
+| **8** | RDM | Resolve, Drill, Mix diverse teams. |
+
+---
+
+## Visual Resources
+
+<img width="557" height="30999" alt="image" src="https://github.com/user-attachments/assets/2132e930-e1f3-497f-b87c-6490b43dacfc" />
 
 ---
 
